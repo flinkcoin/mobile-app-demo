@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@integer/bottom_button_guideline" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_home"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/constraint_layout_auto_size"
+        app:layout_constraintBottom_toTopOf="@id/guideline_bottom_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/text_balance"
+                style="@style/Flink.TextView.Home.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/home_headline_margin"
+                android:layout_marginTop="@dimen/home_headline_margin"
+                android:text="@string/balance"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_account_balance"
+                style="@style/Flink.TextView.Home.Balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_balance_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_balance"
+                tools:text="10000.000000000 \u20A3" />
+
+            <TextView
+                android:id="@+id/text_payment_requests"
+                style="@style/Flink.TextView.Home.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/home_headline_margin"
+                android:layout_marginTop="@dimen/home_headline_margin"
+                android:text="@string/requests"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_account_balance"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/text_payment_requests_number"
+                style="@style/Flink.TextView.Home.Requests"
+                android:layout_width="@dimen/home_payment_request_square_size"
+                android:layout_height="@dimen/home_payment_request_square_size"
+                android:layout_marginEnd="@dimen/home_headline_margin"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/text_payment_requests"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_payment_requests"
+                tools:text="9+"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/text_transactions"
+                style="@style/Flink.TextView.Home.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/home_headline_margin"
+                android:layout_marginTop="@dimen/home_headline_margin"
+                android:text="@string/transactions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_payment_requests_number" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_transactions"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/constraint_layout_auto_size"
+                android:layout_marginTop="@dimen/home_headline_margin"
+                android:layoutAnimation="@anim/layout_animation"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_transactions" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <Button
+        android:id="@+id/button_send"
+        style="@style/Flink.Button.Red"
+        android:layout_width="@dimen/constraint_layout_auto_size"
+        android:layout_height="@dimen/constraint_layout_auto_size"
+        android:layout_margin="@dimen/button_margin"
+        android:text="@string/send_payment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_request_payment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_bottom_button" />
+
+    <Button
+        android:id="@+id/button_request_payment"
+        style="@style/Flink.Button.Green"
+        android:layout_width="@dimen/constraint_layout_auto_size"
+        android:layout_height="@dimen/constraint_layout_auto_size"
+        android:layout_margin="@dimen/button_margin"
+        android:text="@string/request_payment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_send"
+        app:layout_constraintTop_toBottomOf="@id/guideline_bottom_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

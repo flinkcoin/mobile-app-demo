@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.init.InitWalletFragment">
+
+    <ImageView
+        android:id="@+id/image_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_flink_logo"
+        android:src="@drawable/ic_flink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="@integer/bottom_button_guideline" />
+
+    <Button
+        android:id="@+id/button_create_wallet"
+        style="@style/Flink.Button"
+        android:layout_width="@dimen/constraint_layout_auto_size"
+        android:layout_height="@dimen/constraint_layout_auto_size"
+        android:layout_margin="@dimen/button_margin"
+        android:text="@string/create_wallet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_import_wallet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_bottom_button" />
+
+    <Button
+        android:id="@+id/button_import_wallet"
+        style="@style/Flink.Button"
+        android:layout_width="@dimen/constraint_layout_auto_size"
+        android:layout_height="@dimen/constraint_layout_auto_size"
+        android:layout_margin="@dimen/button_margin"
+        android:text="@string/import_wallet"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_create_wallet"
+        app:layout_constraintTop_toBottomOf="@id/guideline_bottom_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

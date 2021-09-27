@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/transaction_row_margin_start"
+    android:layout_marginTop="@dimen/transaction_row_margin_top"
+    android:layout_marginEnd="@dimen/transaction_row_margin_end"
+    android:layout_marginBottom="@dimen/transaction_row_margin_bottom">
+
+    <ImageView
+        android:id="@+id/image_transaction_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_transaction_type"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_receive_transaction" />
+
+    <TextView
+        android:id="@+id/text_transaction_account"
+        style="@style/Flink.TextView.TransactionRow.Account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/transaction_row_text_margin_start"
+        app:layout_constraintStart_toEndOf="@id/image_transaction_type"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="ABCD ... ABCD" />
+
+    <TextView
+        android:id="@+id/text_transaction_timestamp"
+        style="@style/Flink.TextView.TransactionRow.Timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/text_transaction_account"
+        app:layout_constraintTop_toBottomOf="@id/text_transaction_account"
+        tools:text="12:34:56" />
+
+    <TextView
+        android:id="@+id/text_transaction_amount"
+        style="@style/Flink.TextView.TransactionRow.Amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="900000000.00 \u20A3" />
+
+    <TextView
+        android:id="@+id/text_transaction_reference_code"
+        style="@style/Flink.TextView.TransactionRow.ReferenceCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_transaction_amount"
+        tools:text="#reference code" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

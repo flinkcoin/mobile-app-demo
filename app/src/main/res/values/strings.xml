@@ -1,3 +1,86 @@
 <resources>
     <string name="app_name">Flink</string>
+    <string name="create_wallet">Create wallet</string>
+    <string name="import_wallet">Import wallet</string>
+    <string name="confirm">Confirm</string>
+    <string name="cont">Continue</string>
+    <string name="enter_pin">Enter your PIN</string>
+    <string name="enter_login_pin">Enter your login PIN</string>
+    <string name="confirm_pin">Confirm your PIN</string>
+    <string name="pin_does_not_match">PIN does not match</string>
+    <string name="wrong_pin">Wrong PIN!</string>
+    <string name="account_id">Account ID</string>
+    <string name="secret_phrase">Secret phrase</string>
+    <string name="import_secret_phrase">Import secret phrase</string>
+    <string name="send_payment">Send\npayment</string>
+    <string name="request_payment">Request payment</string>
+    <string name="create_wallet_confirmation">Confirmation</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="confirm_question">Confirm?</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="name">Name</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="block_hash">Block Hash</string>
+    <string name="transaction_details">Transaction Details</string>
+    <string name="payment_request_details">Payment Request Details</string>
+
+    <string name="account">ACCOUNT</string>
+    <string name="transactions">TRANSACTIONS:</string>
+    <string name="balance">BALANCE:</string>
+    <string name="requests">REQUESTS:</string>
+
+    <string name="version">Version %1$s</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_payment_requests">Payment Requests</string>
+    <string name="menu_contacts">Contacts</string>
+    <string name="menu_contact">Contact</string>
+    <string name="menu_add_contact">Add Contact</string>
+    <string name="menu_transactions">Transactions</string>
+    <string name="menu_transaction_details">Transaction details</string>
+    <string name="select_contact">Select Contact</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="amount">Amount</string>
+    <string name="reference_code">Reference Code</string>
+    <string name="send_confirmation">Send Confirmation</string>
+    <string name="payment_request_confirmation">Payment Request Confirmation</string>
+    <string name="send_amount_to_contact">Do you want to send %1$s to %2$s(%3$s)</string>
+
+    <string name="hash_prefix">#%1$s</string>
+
+    <string name="hint_account_id">Account ID</string>
+    <string name="hint_first_name">First name</string>
+    <string name="hint_last_name">Last name</string>
+
+    <string name="x_is_required">%1$s is required!</string>
+    <string name="account_id_format_does_not_match">Account ID format does not match!</string>
+
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+
+    <string name="button_0">0</string>
+    <string name="button_1">1</string>
+    <string name="button_2">2</string>
+    <string name="button_3">3</string>
+    <string name="button_4">4</string>
+    <string name="button_5">5</string>
+    <string name="button_6">6</string>
+    <string name="button_7">7</string>
+    <string name="button_8">8</string>
+    <string name="button_9">9</string>
+    <string name="button_delete">DEL</string>
+    <string name="button_ok">OK</string>
+
+    <string name="content_description_transaction_type">Transaction type</string>
+    <string name="content_description_flink_logo">Flink logo</string>
+    <string name="content_description_pin_number_1">Pin number 1</string>
+    <string name="content_description_pin_number_2">Pin number 2</string>
+    <string name="content_description_pin_number_3">Pin number 3</string>
+    <string name="content_description_pin_number_4">Pin number 4</string>
+    <string name="content_description_pin_number_5">Pin number 5</string>
+    <string name="content_description_pin_number_6">Pin number 6</string>
+
 </resources>

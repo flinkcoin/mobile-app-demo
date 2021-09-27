@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="org.flinkcoin.mobile.demo.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_send_select_contact"
+            app:destination="@id/nav_send_select_contact"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_payment_request_select_contact"
+            app:destination="@id/nav_payment_request_select_contact"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_payment_requests"
+            app:destination="@id/nav_payment_requests"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_transaction_details"
+            app:destination="@id/nav_transaction_details"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_payment_requests"
+        android:name="org.flinkcoin.mobile.demo.ui.payment.request.PaymentRequestsFragment"
+        android:label="@string/menu_payment_requests"
+        tools:layout="@layout/fragment_payment_requests">
+        <action
+            android:id="@+id/action_nav_payment_requests_to_nav_send_confirmation"
+            app:destination="@id/nav_send_confirmation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_contacts"
+        android:name="org.flinkcoin.mobile.demo.ui.contacts.ContactsFragment"
+        android:label="@string/menu_contacts"
+        tools:layout="@layout/fragment_contacts">
+        <action
+            android:id="@+id/action_nav_contacts_to_nav_add_contact"
+            app:destination="@id/nav_add_contact"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_contacts_to_nav_contact"
+            app:destination="@id/nav_contact"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_contact"
+        android:name="org.flinkcoin.mobile.demo.ui.contacts.ContactFragment"
+        android:label="@string/menu_contact"
+        tools:layout="@layout/fragment_contact">
+        <action
+            android:id="@+id/action_nav_contact_to_nav_contacts"
+            app:destination="@id/nav_contacts"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_contacts"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_add_contact"
+        android:name="org.flinkcoin.mobile.demo.ui.contacts.AddContactFragment"
+        android:label="@string/menu_add_contact"
+        tools:layout="@layout/fragment_add_contact">
+        <action
+            android:id="@+id/action_nav_add_contact_to_nav_contacts"
+            app:destination="@id/nav_contacts"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_contacts"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_transactions"
+        android:name="org.flinkcoin.mobile.demo.ui.transactions.TransactionsFragment"
+        android:label="@string/menu_transactions"
+        tools:layout="@layout/fragment_transactions">
+        <action
+            android:id="@+id/action_nav_transactions_to_nav_transaction_details"
+            app:destination="@id/nav_transaction_details"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_transaction_details"
+        android:name="org.flinkcoin.mobile.demo.ui.transactions.TransactionDetailsFragment"
+        android:label="@string/menu_transaction_details"
+        tools:layout="@layout/fragment_transaction_details">
+        <action
+            android:id="@+id/action_nav_transaction_details_to_nav_add_contact"
+            app:destination="@id/nav_add_contact"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_contacts"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_send_select_contact"
+        android:name="org.flinkcoin.mobile.demo.ui.send.SendSelectContactFragment"
+        android:label="@string/select_contact"
+        tools:layout="@layout/fragment_send_select_contact">
+        <action
+            android:id="@+id/action_nav_send_select_contact_to_nav_send_enter_amount"
+            app:destination="@id/nav_send_enter_amount"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_send_enter_amount"
+        android:name="org.flinkcoin.mobile.demo.ui.send.SendEnterAmountFragment"
+        android:label="@string/enter_amount"
+        tools:layout="@layout/fragment_send_enter_amount">
+        <action
+            android:id="@+id/action_nav_send_enter_amount_to_nav_send_confirmation"
+            app:destination="@id/nav_send_confirmation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_send_confirmation"
+        android:name="org.flinkcoin.mobile.demo.ui.send.SendConfirmationFragment"
+        android:label="@string/send_confirmation"
+        tools:layout="@layout/fragment_send_confirmation">
+        <action
+            android:id="@+id/action_nav_send_confirmation_to_nav_home"
+            app:destination="@id/nav_home"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_payment_request_select_contact"
+        android:name="org.flinkcoin.mobile.demo.ui.payment.request.PaymentRequestSelectContactFragment"
+        android:label="@string/select_contact"
+        tools:layout="@layout/fragment_payment_request_select_contact">
+        <action
+            android:id="@+id/action_nav_payment_request_select_contact_to_nav_payment_request_enter_amount"
+            app:destination="@id/nav_payment_request_enter_amount"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_payment_request_enter_amount"
+        android:name="org.flinkcoin.mobile.demo.ui.payment.request.PaymentRequestEnterAmountFragment"
+        android:label="@string/enter_amount"
+        tools:layout="@layout/fragment_payment_request_enter_amount">
+        <action
+            android:id="@+id/action_nav_payment_request_enter_amount_to_nav_payment_request_confirmation"
+            app:destination="@id/nav_payment_request_confirmation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_payment_request_confirmation"
+        android:name="org.flinkcoin.mobile.demo.ui.payment.request.PaymentRequestConfirmationFragment"
+        android:label="@string/payment_request_confirmation"
+        tools:layout="@layout/fragment_payment_request_confirmation">
+        <action
+            android:id="@+id/action_nav_payment_request_confirmation_to_nav_home"
+            app:destination="@id/nav_home"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

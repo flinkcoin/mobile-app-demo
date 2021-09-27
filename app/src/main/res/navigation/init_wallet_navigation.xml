@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/init_wallet_navigation"
+    app:startDestination="@+id/nav_init_home">
+
+    <fragment
+        android:id="@+id/nav_init_home"
+        android:name="org.flinkcoin.mobile.demo.ui.init.InitWalletFragment"
+        android:label="TODO"
+        tools:layout="@layout/fragment_init_wallet">
+        <action
+            android:id="@+id/action_nav_init_home_to_nav_init_create_wallet"
+            app:destination="@id/nav_init_create_wallet"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_init_home_to_nav_init_import_wallet"
+            app:destination="@id/nav_init_import_wallet"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_init_create_wallet"
+        android:name="org.flinkcoin.mobile.demo.ui.init.CreateWalletFragment"
+        android:label="TODO"
+        tools:layout="@layout/fragment_create_wallet">
+        <action
+            android:id="@+id/action_nav_init_create_wallet_to_nav_init_create_wallet_pin"
+            app:destination="@id/nav_init_create_wallet_pin"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_init_create_wallet_pin"
+        android:name="org.flinkcoin.mobile.demo.ui.init.CreateWalletPinFragment"
+        android:label="TODO"
+        tools:layout="@layout/fragment_create_wallet_pin">
+
+        <action
+            android:id="@+id/action_nav_init_create_wallet_pin_to_nav_init_create_wallet_confirm"
+            app:destination="@id/nav_init_create_wallet_confirm"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_init_create_wallet" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_init_create_wallet_confirm"
+        android:name="org.flinkcoin.mobile.demo.ui.init.CreateWalletConfirmFragment"
+        android:label="TODO"
+        tools:layout="@layout/fragment_create_wallet_confirm" />
+
+    <fragment
+        android:id="@+id/nav_init_import_wallet"
+        android:name="org.flinkcoin.mobile.demo.ui.init.ImportWalletFragment"
+        android:label="TODO"
+        tools:layout="@layout/fragment_import_wallet" />
+
+</navigation>

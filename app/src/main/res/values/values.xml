@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="keyboard_guideline" format="float" type="integer">0.5</item>
+    <item name="bottom_button_guideline" format="float" type="integer">0.85</item>
+</resources>
