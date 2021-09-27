@@ -23,7 +23,7 @@ android {
             }
         }
 
-        buildConfigField("String", "WALLET_PROXY_HOST", "\"92.60.37.63\"")
+        buildConfigField("String", "WALLET_PROXY_HOST", "\"127.0.0.1\"")
         buildConfigField("int", "WALLET_PROXY_PORT", "8383")
     }
 
