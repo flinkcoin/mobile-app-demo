@@ -1,10 +1,10 @@
 package org.flinkcoin.mobile.demo.util;
 
-import com.flick.crypto.CryptoException;
-import com.flick.crypto.HashHelper;
-import com.flick.crypto.KeyPair;
-import com.flick.data.proto.common.Common;
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.crypto.CryptoException;
+import org.flinkcoin.crypto.HashHelper;
+import org.flinkcoin.crypto.KeyPair;
+import org.flinkcoin.data.proto.common.Common;
+import org.flinkcoin.helper.helpers.Base32Helper;
 import com.google.protobuf.ByteString;
 
 import net.i2p.crypto.eddsa.EdDSAEngine;

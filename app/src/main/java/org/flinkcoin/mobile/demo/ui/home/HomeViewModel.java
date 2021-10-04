@@ -3,7 +3,7 @@ package org.flinkcoin.mobile.demo.ui.home;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.flick.data.proto.common.Common;
+import org.flinkcoin.data.proto.common.Common;
 
 import org.flinkcoin.mobile.demo.data.model.TransactionData;
 import org.flinkcoin.mobile.demo.data.model.TransactionType;

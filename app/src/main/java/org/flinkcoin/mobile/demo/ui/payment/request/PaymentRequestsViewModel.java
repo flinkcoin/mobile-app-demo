@@ -3,7 +3,7 @@ package org.flinkcoin.mobile.demo.ui.payment.request;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.helper.helpers.Base32Helper;
 
 import org.flinkcoin.mobile.demo.data.model.PaymentRequest;
 import org.flinkcoin.mobile.demo.data.model.PaymentRequestData;

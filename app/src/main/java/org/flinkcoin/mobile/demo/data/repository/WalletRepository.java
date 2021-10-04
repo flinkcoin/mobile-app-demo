@@ -1,11 +1,11 @@
 package org.flinkcoin.mobile.demo.data.repository;
 
-import com.flick.crypto.CryptoException;
-import com.flick.crypto.KeyGenerator;
-import com.flick.crypto.KeyPair;
-import com.flick.data.proto.api.Api;
-import com.flick.data.proto.common.Common;
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.crypto.CryptoException;
+import org.flinkcoin.crypto.KeyGenerator;
+import org.flinkcoin.crypto.KeyPair;
+import org.flinkcoin.data.proto.api.Api;
+import org.flinkcoin.data.proto.common.Common;
+import org.flinkcoin.helper.helpers.Base32Helper;
 
 import org.flinkcoin.mobile.demo.data.db.entity.Account;
 import org.flinkcoin.mobile.demo.data.model.GeneratedAccountData;

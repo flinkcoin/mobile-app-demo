@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.helper.helpers.Base32Helper;
 
 import org.flinkcoin.mobile.demo.databinding.FragmentPaymentRequestsBinding;
 import org.flinkcoin.mobile.demo.ui.payment.request.adapter.PaymentRequestsAdapter;

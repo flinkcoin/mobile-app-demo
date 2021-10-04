@@ -1,8 +1,8 @@
 package org.flinkcoin.mobile.demo.data.repository;
 
-import com.flick.data.proto.api.Api;
-import com.flick.data.proto.common.Common;
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.data.proto.api.Api;
+import org.flinkcoin.data.proto.common.Common;
+import org.flinkcoin.helper.helpers.Base32Helper;
 
 import org.flinkcoin.mobile.demo.data.service.WalletService;
 import org.flinkcoin.mobile.demo.data.service.dto.WalletBlock;
