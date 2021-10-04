@@ -1,8 +1,8 @@
 package org.flinkcoin.mobile.demo.data.model;
 
-import com.flick.crypto.KeyGenerator;
-import com.flick.crypto.KeyPair;
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.crypto.KeyGenerator;
+import org.flinkcoin.crypto.KeyPair;
+import org.flinkcoin.helper.helpers.Base32Helper;
 
 public class AccountData {
 

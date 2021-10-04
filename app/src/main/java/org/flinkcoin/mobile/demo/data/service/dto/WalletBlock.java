@@ -1,7 +1,7 @@
 package org.flinkcoin.mobile.demo.data.service.dto;
 
-import com.flick.data.proto.common.Common;
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.data.proto.common.Common;
+import org.flinkcoin.helper.helpers.Base32Helper;
 
 public class WalletBlock {
 

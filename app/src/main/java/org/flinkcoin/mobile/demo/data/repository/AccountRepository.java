@@ -1,8 +1,8 @@
 package org.flinkcoin.mobile.demo.data.repository;
 
-import com.flick.crypto.CryptoException;
-import com.flick.crypto.mnemonic.Language;
-import com.flick.crypto.mnemonic.MnemonicGenerator;
+import org.flinkcoin.crypto.CryptoException;
+import org.flinkcoin.crypto.mnemonic.Language;
+import org.flinkcoin.crypto.mnemonic.MnemonicGenerator;
 
 import org.flinkcoin.mobile.demo.data.db.dao.AccountDao;
 import org.flinkcoin.mobile.demo.data.db.entity.Account;

@@ -1,6 +1,6 @@
 package org.flinkcoin.mobile.demo.data.ws.dto;
 
-import com.flick.data.proto.api.Api;
+import org.flinkcoin.data.proto.api.Api;
 
 public class MessageDtl {
 
