@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_menu_payment_requests"
             android:title="@string/menu_payment_requests" />
         <item
+            android:id="@+id/nav_nfts"
+            android:icon="@drawable/ic_menu_nft"
+            android:title="@string/menu_nfts" />
+        <item
             android:id="@+id/nav_contacts"
             android:icon="@drawable/ic_menu_contacts"
             android:title="@string/menu_contacts" />

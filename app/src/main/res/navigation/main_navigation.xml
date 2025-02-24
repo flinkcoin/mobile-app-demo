@@ -55,6 +55,14 @@
     </fragment>
 
     <fragment
+        android:id="@+id/nav_nfts"
+        android:name="org.flinkcoin.mobile.demo.ui.nft.NftsFragment"
+        android:label="@string/menu_nfts"
+        tools:layout="@layout/fragment_nfts">
+
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_contacts"
         android:name="org.flinkcoin.mobile.demo.ui.contacts.ContactsFragment"
         android:label="@string/menu_contacts"
