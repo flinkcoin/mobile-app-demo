@@ -37,6 +37,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_payment_requests">Payment Requests</string>
     <string name="menu_nfts">NFTs</string>
+    <string name="menu_add_nft">Add NFT</string>
     <string name="menu_contacts">Contacts</string>
     <string name="menu_contact">Contact</string>
     <string name="menu_add_contact">Add Contact</string>
@@ -83,5 +84,9 @@
     <string name="content_description_pin_number_4">Pin number 4</string>
     <string name="content_description_pin_number_5">Pin number 5</string>
     <string name="content_description_pin_number_6">Pin number 6</string>
+
+    <string name="add_photo">Add a Photo</string>
+    <string name="take_a_picture">Take a Picture</string>
+    <string name="choose_from_gallery">Choose from Gallery</string>
 
 </resources>

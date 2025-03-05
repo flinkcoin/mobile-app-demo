@@ -7,21 +7,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
-import org.flinkcoin.mobile.demo.databinding.FragmentNftsBinding;
+import org.flinkcoin.mobile.demo.databinding.FragmentAddNftBinding;
 
-public class NftsFragment extends Fragment {
+public class AddNftFragment extends Fragment {
 
-    private FragmentNftsBinding binding;
+    private FragmentAddNftBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentNftsBinding.inflate(inflater, container, false);
-
-        binding.fabCreateNft.setOnClickListener((v) -> {
-            Navigation.findNavController(v).navigate(NftsFragmentDirections.actionNavNftsToNavAddNft());
-        });
+        binding = FragmentAddNftBinding.inflate(inflater, container, false);
 
         View view = binding.getRoot();
         return view;
