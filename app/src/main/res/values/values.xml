@@ -2,4 +2,6 @@
 <resources>
     <item name="keyboard_guideline" format="float" type="integer">0.5</item>
     <item name="bottom_button_guideline" format="float" type="integer">0.85</item>
+    <item name="top_button_guideline" format="float" type="integer">0.15</item>
+    <item name="middle_button_guideline" format="float" type="integer">0.50</item>
 </resources>
