@@ -5,26 +5,67 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import org.flinkcoin.mobile.demo.databinding.FragmentAddNftBinding;
+
+import java.util.Objects;
 
 public class AddNftFragment extends Fragment {
 
     private FragmentAddNftBinding binding;
+    private NftViewModel nftViewModel;
+    private ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        nftViewModel = new ViewModelProvider(requireActivity()).get(NftViewModel.class);
+        pickMedia =
+                registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+                    if (Objects.nonNull(uri)) {
+                        nftViewModel.setSelectedImage(uri);
+                        Navigation.findNavController(requireView()).navigate(AddNftFragmentDirections.actionNavAddNftToNavNftCreateHash());
+                    }
+                });
+        super.onCreate(savedInstanceState);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAddNftBinding.inflate(inflater, container, false);
 
+        binding.buttonChooseFromGallery.setOnClickListener((v) -> {
+            launchPhotoPicker();
+        });
+
         View view = binding.getRoot();
         return view;
+    }
+
+
+    private void launchPhotoPicker() {
+        pickMedia.launch(new PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                .build());
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        pickMedia = null;
     }
 }
