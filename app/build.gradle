@@ -11,8 +11,8 @@ android {
         applicationId "org.flinkcoin.mobile.demo"
         minSdkVersion 26
         targetSdkVersion 30
-        versionCode 1
-        versionName "0.1-alpha"
+        versionCode 2
+        versionName "0.2-alpha"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -87,5 +87,7 @@ dependencies {
 
     implementation ("org.flinkcoin:crypto:0.0.0")
     implementation ("org.flinkcoin:data:0.0.0")
+
+    implementation files('libs/pdq-hasher.jar')
 
 }
