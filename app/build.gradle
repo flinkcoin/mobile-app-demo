@@ -88,6 +88,4 @@ dependencies {
     implementation("org.flinkcoin:crypto:0.0.0")
     implementation("org.flinkcoin:data:0.0.0")
 
-    implementation files('libs/pdq-hasher.jar')
-
 }
