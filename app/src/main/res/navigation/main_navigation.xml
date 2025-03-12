@@ -60,35 +60,12 @@
         android:label="@string/menu_nfts"
         tools:layout="@layout/fragment_nfts">
         <action
-            android:id="@+id/action_nav_nfts_to_nav_add_nft"
-            app:destination="@id/nav_add_nft"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_add_nft"
-        android:name="org.flinkcoin.mobile.demo.ui.nft.AddNftFragment"
-        android:label="@string/menu_add_nft"
-        tools:layout="@layout/fragment_add_nft">
-        <action
-            android:id="@+id/action_nav_add_nft_to_nav_nfts"
-            app:destination="@id/nav_nfts"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/nav_nfts"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_nav_add_nft_to_nav_nft_create_hash"
-            app:destination="@id/nav_nft_create_hash"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+        android:id="@+id/action_nav_nfts_to_nav_nft_create_hash"
+        app:destination="@id/nav_nft_create_hash"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -96,6 +73,16 @@
         android:name="org.flinkcoin.mobile.demo.ui.nft.NftCreateHashFragment"
         android:label="@string/menu_nft_create_signature"
         tools:layout="@layout/fragment_nft_create_hash">
+
+        <action
+            android:id="@+id/action_nav_nft_create_hash_to_nav_nfts"
+            app:destination="@id/nav_nfts"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_nfts"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
