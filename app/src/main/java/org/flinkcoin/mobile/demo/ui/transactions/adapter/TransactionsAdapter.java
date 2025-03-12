@@ -61,10 +61,6 @@ public class TransactionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 transactionViewHolder.getTransactionType().setImageResource(R.drawable.ic_send_transaction);
             } else if (TransactionType.RECEIVE == transactionData.getType()) {
                 transactionViewHolder.getTransactionType().setImageResource(R.drawable.ic_receive_transaction);
-            } else if (TransactionType.ADD_NFT == transactionData.getType()) {
-                transactionViewHolder.getTransactionType().setImageResource(R.drawable.ic_menu_nft);
-            } else if (TransactionType.DEL_NFT == transactionData.getType()) {
-                transactionViewHolder.getTransactionType().setImageResource(R.drawable.ic_menu_nft);
             } else {
                 return;
             }

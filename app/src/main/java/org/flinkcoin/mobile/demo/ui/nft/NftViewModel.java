@@ -1,27 +1,30 @@
 package org.flinkcoin.mobile.demo.ui.nft;
 
+import static org.flinkcoin.data.proto.common.Common.Block.BlockType.ADD_NFT;
+import static org.flinkcoin.data.proto.common.Common.Block.BlockType.DEL_NFT;
+
 import android.net.Uri;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import org.flinkcoin.data.proto.common.Common;
-import org.flinkcoin.mobile.demo.data.model.TransactionData;
+import org.flinkcoin.helper.helpers.Base32Helper;
+import org.flinkcoin.mobile.demo.data.model.NftData;
 import org.flinkcoin.mobile.demo.data.model.TransactionType;
 import org.flinkcoin.mobile.demo.data.repository.WalletRepository;
 import org.flinkcoin.mobile.demo.data.service.dto.WalletBlock;
-import org.flinkcoin.mobile.demo.ui.transactions.adapter.TransactionDataItem;
-import org.flinkcoin.mobile.demo.ui.transactions.adapter.TransactionListItem;
-import org.flinkcoin.mobile.demo.util.AccountIdUtils;
-import org.flinkcoin.mobile.demo.util.CurrencyUtils;
-import org.flinkcoin.mobile.demo.util.ReferenceCodeUtils;
+import org.flinkcoin.mobile.demo.ui.nft.adapter.NftDataItem;
+import org.flinkcoin.mobile.demo.util.AccountCodeUtils;
+import org.flinkcoin.mobile.demo.util.ByteArrayHelper;
+import org.flinkcoin.mobile.demo.util.NftCodeUtils;
 
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -33,13 +36,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 @HiltViewModel
 public class NftViewModel extends ViewModel {
 
-    private static final DateTimeFormatter TRANSACTION_TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
-
     private final WalletRepository walletRepository;
 
     private final CompositeDisposable compositeDisposable;
-    private final MutableLiveData<WalletBlock> lastTransaction;
-    private final MutableLiveData<List<TransactionListItem>> transactions;
+    private final MutableLiveData<List<NftDataItem>> nfts;
 
     private Uri selectedImage;
 
@@ -48,8 +48,7 @@ public class NftViewModel extends ViewModel {
         this.walletRepository = walletRepository;
 
         this.compositeDisposable = new CompositeDisposable();
-        this.lastTransaction = new MutableLiveData<>();
-        this.transactions = new MutableLiveData<>();
+        this.nfts = new MutableLiveData<>();
 
         init();
     }
@@ -59,37 +58,34 @@ public class NftViewModel extends ViewModel {
                 .subscribeOn(Schedulers.io())
                 .subscribe(walletBlocks -> {
 
-                    List<WalletBlock> sendReceiveBlocks = walletBlocks.stream().
-                            filter(walletBlock -> Common.Block.BlockType.ADD_NFT.equals(walletBlock.blockType) || Common.Block.BlockType.DEL_NFT.equals(walletBlock.blockType)).
+                    List<WalletBlock> nftBlocks = walletBlocks.stream().
+                            filter(walletBlock -> Common.Block.BlockType.ADD_NFT.equals(walletBlock.blockType) || DEL_NFT.equals(walletBlock.blockType)).
                             collect(Collectors.toList());
 
-                    List<TransactionListItem> items = new ArrayList<>();
+                    Map<String, NftDataItem> items = new HashMap<>();
+                    Set<String> deleted = new HashSet<>();
 
-                    for (WalletBlock walletBlock : sendReceiveBlocks) {
+                    for (WalletBlock walletBlock : nftBlocks) {
 
                         TransactionType type;
-                        switch (walletBlock.blockType) {
-                            case ADD_NFT:
-                                type = TransactionType.ADD_NFT;
-                                break;
-                            case DEL_NFT:
-                            default:
-                                type = TransactionType.DEL_NFT;
-                                break;
+                        if (DEL_NFT == walletBlock.blockType) {
+                            deleted.add(walletBlock.nftCode);
+                        } else if (ADD_NFT == walletBlock.blockType) {
+
+
+                            String nftCodeBase32 = Base32Helper.encode(ByteArrayHelper.hexStringToByteArray(walletBlock.nftCode));
+
+                            items.put(walletBlock.nftCode, new NftDataItem(new NftData(
+                                    AccountCodeUtils.format(walletBlock.accountCode),
+                                    walletBlock.nftCode,
+                                    nftCodeBase32,
+                                    NftCodeUtils.mask(nftCodeBase32),
+                                    walletBlock)));
+
                         }
-
-                        items.add(new TransactionDataItem(new TransactionData(type,
-                                walletBlock.accountId,
-                                AccountIdUtils.mask(walletBlock.accountId),
-                                null,
-                                CurrencyUtils.format(walletBlock.amount),
-                                ZonedDateTime.ofInstant(Instant.ofEpochMilli(walletBlock.timestamp),
-                                        ZoneId.systemDefault()).format(TRANSACTION_TIMESTAMP_FORMATTER),
-                                ReferenceCodeUtils.format(walletBlock.referenceCode),
-                                walletBlock)));
                     }
-
-                    transactions.postValue(items);
+                    deleted.forEach(items::remove);
+                    nfts.postValue(new ArrayList<>(items.values()));
 
                 }, throwable -> {
 
@@ -112,8 +108,8 @@ public class NftViewModel extends ViewModel {
         walletRepository.requestTransactions();
     }
 
-    public MutableLiveData<List<TransactionListItem>> getTransactions() {
-        return transactions;
+    public MutableLiveData<List<NftDataItem>> getNfts() {
+        return nfts;
     }
 
     @Override
