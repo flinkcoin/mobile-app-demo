@@ -98,6 +98,9 @@
 
     <style name="Flink.TextView.TransactionRow.Header.Date" parent="TextAppearance.MaterialComponents.Body1" />
 
+    <style name="Flink.TextView.NftRow.Code" parent="TextAppearance.MaterialComponents.Body1" />
+    <style name="Flink.TextView.NftRow.AccountCode" parent="TextAppearance.MaterialComponents.Body1" />
+
     <style name="Flink.TextView.Navigation.Header.Account" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>

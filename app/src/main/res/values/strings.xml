@@ -78,6 +78,7 @@
     <string name="button_ok">OK</string>
 
     <string name="content_description_transaction_type">Transaction type</string>
+    <string name="content_description_nft_preview">NFT preview</string>
     <string name="content_description_flink_logo">Flink logo</string>
     <string name="content_description_pin_number_1">Pin number 1</string>
     <string name="content_description_pin_number_2">Pin number 2</string>

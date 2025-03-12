@@ -1,9 +1,13 @@
 package org.flinkcoin.mobile.demo.ui.nft;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
@@ -16,7 +20,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import org.flinkcoin.mobile.demo.databinding.FragmentNftsBinding;
-import org.flinkcoin.mobile.demo.ui.transactions.adapter.TransactionsAdapter;
+import org.flinkcoin.mobile.demo.ui.nft.adapter.NftsAdapter;
 
 import java.util.Objects;
 
@@ -48,17 +52,21 @@ public class NftsFragment extends Fragment {
             launchPhotoPicker();
         });
 
-        TransactionsAdapter transactionsAdapter = new TransactionsAdapter(transactionData -> {
-            //TODO: on click?
+        NftsAdapter nftsAdapter = new NftsAdapter(nftData -> {
+            ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Nft code", nftData.getNftCodeBase32());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getContext(), "NFT code has been copied to clipboard.", Toast.LENGTH_SHORT).show();
         });
+
         binding.recyclerViewNfts.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.recyclerViewNfts.setAdapter(transactionsAdapter);
+        binding.recyclerViewNfts.setAdapter(nftsAdapter);
 
         binding.swipeRefreshNfts.setOnRefreshListener(nftViewModel::requestData);
         binding.swipeRefreshNfts.setRefreshing(true);
 
-        nftViewModel.getTransactions().observe(getViewLifecycleOwner(), transactions -> {
-            transactionsAdapter.setItems(transactions);
+        nftViewModel.getNfts().observe(getViewLifecycleOwner(), nfts -> {
+            nftsAdapter.setItems(nfts);
             binding.recyclerViewNfts.scheduleLayoutAnimation();
             binding.swipeRefreshNfts.setRefreshing(false);
         });
