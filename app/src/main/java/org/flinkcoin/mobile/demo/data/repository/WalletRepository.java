@@ -1,12 +1,16 @@
 package org.flinkcoin.mobile.demo.data.repository;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+
 import org.flinkcoin.crypto.CryptoException;
 import org.flinkcoin.crypto.KeyGenerator;
 import org.flinkcoin.crypto.KeyPair;
 import org.flinkcoin.data.proto.api.Api;
 import org.flinkcoin.data.proto.common.Common;
 import org.flinkcoin.helper.helpers.Base32Helper;
-
 import org.flinkcoin.mobile.demo.data.db.entity.Account;
 import org.flinkcoin.mobile.demo.data.model.GeneratedAccountData;
 import org.flinkcoin.mobile.demo.data.service.MacgyverService;
@@ -16,9 +20,11 @@ import org.flinkcoin.mobile.demo.data.service.dto.WalletTransaction;
 import org.flinkcoin.mobile.demo.data.ws.WebSocketHandler;
 import org.flinkcoin.mobile.demo.data.ws.dto.MessageDtl;
 import org.flinkcoin.mobile.demo.util.BlockHelper;
+import org.flinkcoin.mobile.demo.util.PDQHasherUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
@@ -30,6 +36,7 @@ import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -44,6 +51,8 @@ public class WalletRepository {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WalletRepository.class);
 
+    private final Context context;
+
     private final WalletService walletService;
     private final MacgyverService macgyverService;
     private final WebSocketHandler webSocketHandler;
@@ -57,9 +66,11 @@ public class WalletRepository {
     private final Subject<List<WalletBlock>> transactionsSubject = PublishSubject.create();
 
     @Inject
-    public WalletRepository(WalletService walletService, MacgyverService macgyverService, WebSocketHandler webSocketHandler,
-                            AccountRepository accountRepository, LastWalletBlockRepository lastWalletBlockRepository, WalletBlocksRepository walletBlocksRepository,
-                            UnclaimedWalletBlocksRepository unclaimedWalletBlocksRepository, WalletTransactionRepository walletTransactionRepository) {
+    public WalletRepository(
+            @ApplicationContext Context context, WalletService walletService, MacgyverService macgyverService, WebSocketHandler webSocketHandler,
+            AccountRepository accountRepository, LastWalletBlockRepository lastWalletBlockRepository, WalletBlocksRepository walletBlocksRepository,
+            UnclaimedWalletBlocksRepository unclaimedWalletBlocksRepository, WalletTransactionRepository walletTransactionRepository) {
+        this.context = context;
         this.walletService = walletService;
         this.macgyverService = macgyverService;
         this.webSocketHandler = webSocketHandler;
@@ -125,7 +136,8 @@ public class WalletRepository {
             Response<ResponseBody> execute = payToResponse.execute();
 
             return true;
-        } catch (SignatureException | NoSuchAlgorithmException | CryptoException | InvalidKeyException | IOException ex) {
+        } catch (SignatureException | NoSuchAlgorithmException | CryptoException |
+                 InvalidKeyException | IOException ex) {
             //TODO
         }
 
@@ -200,6 +212,46 @@ public class WalletRepository {
                             amount,
                             Base32Helper.decode(sendAccountId),
                             reference,
+                            keyPair
+                    );
+
+                    return sendBlock;
+                }).concatMap(sendBlock -> walletTransactionRepository.addWalletTransaction(sendBlock))
+                .subscribeOn(Schedulers.io())
+                .subscribe(lastWalletBlock -> {
+                    LOGGER.info("block added");
+                    updateLastWalletBlock(lastWalletBlock);
+                });
+
+    }
+
+    public void addNft(String accountCode, Uri nftUri) {
+
+        Bitmap bitmap = null;
+        try {
+            bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(nftUri));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String nftCode = PDQHasherUtil.getHash(bitmap);
+
+        lastWalletBlockRepository
+                .getLastWalletBlock(accountRepository.getAccountData().getAccountIdBase32())
+                .map(lastBlock -> {
+                    long timestamp = System.currentTimeMillis();
+                    byte[] accountId = accountRepository.getAccountData().getAccountId();
+                    KeyPair keyPair = accountRepository.getAccountData().getKeyPair();
+
+                    byte[] account = null != accountCode ? accountCode.getBytes(StandardCharsets.UTF_8) : new byte[0];
+                    byte[] nft = null != nftCode ? nftCode.getBytes(StandardCharsets.UTF_8) : new byte[0];
+
+                    LOGGER.info("creating add nft block: " + nftCode);
+                    Common.Block sendBlock = BlockHelper.createAddNftBlock(timestamp,
+                            Base32Helper.decode(lastBlock.hash),
+                            accountId,
+                            lastBlock.balance,
+                            account,
+                            nft,
                             keyPair
                     );
 
