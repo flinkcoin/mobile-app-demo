@@ -1,5 +1,6 @@
 package org.flinkcoin.mobile.demo.ui.nft.adapter;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import org.flinkcoin.mobile.demo.R;
 import org.flinkcoin.mobile.demo.data.model.NftData;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class NftsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -42,7 +44,13 @@ public class NftsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         nftViewHolder.getTransactionType().setImageResource(R.drawable.ic_receive_transaction);
         nftViewHolder.getNftCode().setText(nftData.getMaskedNftCode());
         nftViewHolder.getAccountCode().setText(nftData.getAccountCode());
-        nftViewHolder.getNftPreview().setImageResource(R.drawable.ic_question_mark);
+
+        Bitmap nftPreview = nftData.getNftPreview();
+        if (Objects.nonNull(nftPreview)) {
+            nftViewHolder.getNftPreview().setImageBitmap(nftPreview);
+        } else {
+            nftViewHolder.getNftPreview().setImageResource(R.drawable.ic_question_mark);
+        }
 
         if (onClickConsumer != null) {
             viewHolder.itemView.setOnClickListener(v -> onClickConsumer.accept(nftData));
