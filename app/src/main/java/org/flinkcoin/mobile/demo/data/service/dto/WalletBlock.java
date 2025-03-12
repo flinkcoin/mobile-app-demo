@@ -15,6 +15,8 @@ public class WalletBlock {
     public String receiveBlockHash;
     public Common.Block.BlockType blockType;
     public String referenceCode;
+    public String accountCode;
+    public String nftCode;
 
     public WalletBlock(Common.Block block) {
         this.accountId = Base32Helper.encode(block.getBody().getAccountId().toByteArray());
@@ -27,6 +29,8 @@ public class WalletBlock {
         this.blockType = block.getBody().getBlockType();
         this.sendAccountId = Base32Helper.encode(block.getBody().getSendAccountId().toByteArray());
         this.referenceCode = block.getBody().getReferenceCode().toStringUtf8();
+        this.accountCode = block.getBody().getAccountCode().toStringUtf8();
+        this.nftCode = block.getBody().getNftCode().toStringUtf8();
         this.receiveBlockHash = Base32Helper.encode(block.getBody().getReceiveBlockHash().toByteArray());
     }
 
