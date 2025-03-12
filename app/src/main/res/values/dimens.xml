@@ -18,8 +18,6 @@
     <dimen name="transaction_row_margin_start">20dp</dimen>
     <dimen name="transaction_row_margin_end">20dp</dimen>
 
-    <dimen name="nft_preview_margin_end">20dp</dimen>
-
     <dimen name="transaction_row_text_margin_start">10dp</dimen>
 
     <dimen name="pin_circle_size">30dp</dimen>

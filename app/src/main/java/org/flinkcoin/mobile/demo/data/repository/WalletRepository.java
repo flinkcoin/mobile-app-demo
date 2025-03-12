@@ -20,11 +20,14 @@ import org.flinkcoin.mobile.demo.data.service.dto.WalletTransaction;
 import org.flinkcoin.mobile.demo.data.ws.WebSocketHandler;
 import org.flinkcoin.mobile.demo.data.ws.dto.MessageDtl;
 import org.flinkcoin.mobile.demo.util.BlockHelper;
+import org.flinkcoin.mobile.demo.util.ByteArrayHelper;
 import org.flinkcoin.mobile.demo.util.PDQHasherUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
@@ -234,6 +237,9 @@ public class WalletRepository {
             throw new RuntimeException(e);
         }
         String nftCode = PDQHasherUtil.getHash(bitmap);
+        String nftCodeBase32 = Base32Helper.encode(ByteArrayHelper.hexStringToByteArray(nftCode));
+
+        savePreviewBitmap(bitmap, nftCodeBase32, context.getResources().getDisplayMetrics().widthPixels/5);
 
         lastWalletBlockRepository
                 .getLastWalletBlock(accountRepository.getAccountData().getAccountIdBase32())
@@ -263,6 +269,27 @@ public class WalletRepository {
                     updateLastWalletBlock(lastWalletBlock);
                 });
 
+    }
+
+    public void savePreviewBitmap(Bitmap bitmap, String fileName, int previewWidth) {
+        int originalWidth = bitmap.getWidth();
+        int originalHeight = bitmap.getHeight();
+        int previewHeight = (int) ((float) previewWidth / originalWidth * originalHeight);
+
+        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, true);
+
+        File directory = new File(context.getExternalFilesDir(null), "previews");
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        File file = new File(directory, fileName + "_preview.png");
+        try (FileOutputStream out = new FileOutputStream(file)) {
+            previewBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void requestTransactions() {
