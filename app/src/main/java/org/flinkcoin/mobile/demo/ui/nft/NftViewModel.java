@@ -4,6 +4,8 @@ import android.net.Uri;
 
 import androidx.lifecycle.ViewModel;
 
+import org.flinkcoin.mobile.demo.data.repository.WalletRepository;
+
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
@@ -11,11 +13,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class NftViewModel extends ViewModel {
 
+    private final WalletRepository walletRepository;
+
     private Uri selectedImage;
 
     @Inject
-    public NftViewModel() {
-        //empty
+    public NftViewModel(WalletRepository walletRepository) {
+        this.walletRepository = walletRepository;
     }
 
     public Uri getSelectedImage() {
@@ -25,4 +29,9 @@ public class NftViewModel extends ViewModel {
     public void setSelectedImage(Uri selectedImage) {
         this.selectedImage = selectedImage;
     }
+
+    public void createNft() {
+        walletRepository.addNft(null, selectedImage);
+    }
+
 }
