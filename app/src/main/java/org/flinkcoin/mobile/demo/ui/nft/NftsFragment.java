@@ -13,8 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import org.flinkcoin.mobile.demo.databinding.FragmentNftsBinding;
+import org.flinkcoin.mobile.demo.ui.transactions.adapter.TransactionsAdapter;
 
 import java.util.Objects;
 
@@ -37,13 +39,31 @@ public class NftsFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentNftsBinding.inflate(inflater, container, false);
-
+        nftViewModel = new ViewModelProvider(requireActivity()).get(NftViewModel.class);
         binding.fabCreateNft.setOnClickListener((v) -> {
             launchPhotoPicker();
         });
+
+        TransactionsAdapter transactionsAdapter = new TransactionsAdapter(transactionData -> {
+            //TODO: on click?
+        });
+        binding.recyclerViewNfts.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerViewNfts.setAdapter(transactionsAdapter);
+
+        binding.swipeRefreshNfts.setOnRefreshListener(nftViewModel::requestData);
+        binding.swipeRefreshNfts.setRefreshing(true);
+
+        nftViewModel.getTransactions().observe(getViewLifecycleOwner(), transactions -> {
+            transactionsAdapter.setItems(transactions);
+            binding.recyclerViewNfts.scheduleLayoutAnimation();
+            binding.swipeRefreshNfts.setRefreshing(false);
+        });
+
+        nftViewModel.requestData();
 
         View view = binding.getRoot();
         return view;
