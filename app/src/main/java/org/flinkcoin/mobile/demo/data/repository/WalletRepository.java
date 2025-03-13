@@ -132,7 +132,7 @@ public class WalletRepository {
             }
 
             Account account = new Account(Base32Helper.encode(generatedAccountData.getAccountId()), generatedAccountData.getAccountIdPhrase(),
-                    generatedAccountData.getKeySeedPhrase(), generatedAccountData.getKeySeed(), pin,"");
+                    generatedAccountData.getKeySeedPhrase(), generatedAccountData.getKeySeed(), pin, "");
             accountRepository.insert(account).subscribe();
 
             Call<ResponseBody> payToResponse = macgyverService.payTo(Base32Helper.encode(accountId), "100000000000000");
@@ -228,7 +228,7 @@ public class WalletRepository {
 
     }
 
-    public void addNft(String accountCode, Uri nftUri) {
+    public void addNft(Uri nftUri) {
 
         Bitmap bitmap = null;
         try {
@@ -249,7 +249,8 @@ public class WalletRepository {
                     byte[] accountId = accountRepository.getAccountData().getAccountId();
                     KeyPair keyPair = accountRepository.getAccountData().getKeyPair();
 
-                    byte[] account = null != accountCode ? accountCode.getBytes(StandardCharsets.UTF_8) : new byte[0];
+                    String accoutCode = accountRepository.getAccountData().getAccountCode();
+                    byte[] account = null != accoutCode ? accoutCode.getBytes(StandardCharsets.UTF_8) : new byte[0];
                     byte[] nft = nftBytes;
 
                     LOGGER.info("creating add nft hex: " + nftCode);

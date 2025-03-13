@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModel;
 
 import org.flinkcoin.data.proto.common.Common;
 import org.flinkcoin.mobile.demo.data.model.NftData;
+import org.flinkcoin.mobile.demo.data.repository.AccountRepository;
 import org.flinkcoin.mobile.demo.data.repository.WalletRepository;
 import org.flinkcoin.mobile.demo.data.service.dto.WalletBlock;
 import org.flinkcoin.mobile.demo.ui.nft.adapter.NftDataItem;
@@ -32,6 +33,7 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dagger.hilt.android.qualifiers.ApplicationContext;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -40,6 +42,7 @@ public class NftViewModel extends ViewModel {
 
     private final Context context;
     private final WalletRepository walletRepository;
+    private final AccountRepository accountRepository;
 
     private final CompositeDisposable compositeDisposable;
     private final MutableLiveData<List<NftDataItem>> nfts;
@@ -48,9 +51,10 @@ public class NftViewModel extends ViewModel {
 
     @Inject
     public NftViewModel(@ApplicationContext Context context,
-                        WalletRepository walletRepository) {
+                        WalletRepository walletRepository, AccountRepository accountRepository) {
         this.context = context;
         this.walletRepository = walletRepository;
+        this.accountRepository = accountRepository;
 
         this.compositeDisposable = new CompositeDisposable();
         this.nfts = new MutableLiveData<>();
@@ -117,7 +121,7 @@ public class NftViewModel extends ViewModel {
     }
 
     public void createNft() {
-        walletRepository.addNft(null, selectedImage);
+        walletRepository.addNft(selectedImage);
     }
 
     public void requestData() {
@@ -136,4 +140,11 @@ public class NftViewModel extends ViewModel {
         }
     }
 
+    public Completable updateAccountCode(String accountCode) {
+        return accountRepository.updateAccountCode(accountCode);
+    }
+
+    public String getAccountCode() {
+        return accountRepository.getAccountData().getAccountCode();
+    }
 }
