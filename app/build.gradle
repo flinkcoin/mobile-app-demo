@@ -23,7 +23,7 @@ android {
             }
         }
 
-        buildConfigField("String", "WALLET_PROXY_HOST", "\"10.0.2.2.\"")
+        buildConfigField("String", "WALLET_PROXY_HOST", "\"node.flinkcoin.org\"")
         buildConfigField("int", "WALLET_PROXY_PORT", "8383")
     }
 
