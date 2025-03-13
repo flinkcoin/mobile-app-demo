@@ -55,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
         TextView accountIdText = headerView.findViewById(R.id.text_account_id);
         accountIdText.setText(mainViewModel.getAccountIdBase32());
 
+        String accountCode = mainViewModel.getAccountCode();
+        if (Objects.isNull(accountCode) || accountCode.isEmpty()) {
+            headerView.findViewById(R.id.text_account_code).setVisibility(View.GONE);
+        } else {
+            TextView accountCodeText = headerView.findViewById(R.id.text_account_code);
+            accountCodeText.setText(accountCode);
+        }
+
         headerView.findViewById(R.id.layout_account).setOnClickListener(v -> {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("Account", mainViewModel.getAccountIdBase32());
