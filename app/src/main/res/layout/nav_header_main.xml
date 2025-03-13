@@ -42,6 +42,15 @@
             app:layout_constraintTop_toBottomOf="@id/text_account"
             tools:text="ABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 
+        <TextView
+            android:id="@+id/text_account_code"
+            style="@style/Flink.TextView.Navigation.Header.AccountCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_account_id"
+            tools:text="#picasso" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

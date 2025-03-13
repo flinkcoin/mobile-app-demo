@@ -21,4 +21,8 @@ public class MainViewModel extends ViewModel {
     public String getAccountIdBase32() {
         return accountRepository.getAccountData().getAccountIdBase32();
     }
+
+    public String getAccountCode(){
+        return accountRepository.getAccountData().getAccountCode();
+    }
 }

@@ -8,11 +8,13 @@ public class AccountData {
 
     private final byte[] accountId;
     private final String accountIdBase32;
+    private final String accountCode;
     private final KeyPair keyPair;
 
-    public AccountData(String accountIdBase32, byte[] keySeed) {
+    public AccountData(String accountIdBase32, String accountCode, byte[] keySeed) {
         this.accountIdBase32 = accountIdBase32;
         this.accountId = Base32Helper.decode(accountIdBase32);
+        this.accountCode = accountCode;
         this.keyPair = KeyGenerator.getKeyPairFromSeed(keySeed);
     }
 
@@ -26,5 +28,9 @@ public class AccountData {
 
     public KeyPair getKeyPair() {
         return keyPair;
+    }
+
+    public String getAccountCode() {
+        return accountCode;
     }
 }

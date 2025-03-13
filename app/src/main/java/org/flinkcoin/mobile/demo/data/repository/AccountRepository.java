@@ -3,7 +3,6 @@ package org.flinkcoin.mobile.demo.data.repository;
 import org.flinkcoin.crypto.CryptoException;
 import org.flinkcoin.crypto.mnemonic.Language;
 import org.flinkcoin.crypto.mnemonic.MnemonicGenerator;
-
 import org.flinkcoin.mobile.demo.data.db.dao.AccountDao;
 import org.flinkcoin.mobile.demo.data.db.entity.Account;
 import org.flinkcoin.mobile.demo.data.model.AccountData;
@@ -42,7 +41,7 @@ public class AccountRepository {
     public Maybe<Account> readAccount() {
         return accountDao.getAccount()
                 .map(account -> {
-                    this.accountData = new AccountData(account.getAccountId(), account.getSeed());
+                    this.accountData = new AccountData(account.getAccountId(), account.getAccountCode(), account.getSeed());
                     return account;
                 });
     }
