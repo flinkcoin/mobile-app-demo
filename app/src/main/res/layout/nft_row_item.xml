@@ -25,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/transaction_row_text_margin_start"
+        app:layout_constraintBottom_toTopOf="@id/text_account_code"
         app:layout_constraintEnd_toStartOf="@id/image_nft_preview"
         app:layout_constraintStart_toEndOf="@id/image_transaction_type"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,6 +36,7 @@
         style="@style/Flink.TextView.TransactionRow.Timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/text_nft_code"
         app:layout_constraintTop_toBottomOf="@id/text_nft_code"
         tools:text="#mynft" />
