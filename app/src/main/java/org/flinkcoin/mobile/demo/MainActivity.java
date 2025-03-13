@@ -26,9 +26,13 @@ import org.flinkcoin.mobile.demo.util.AccountCodeUtils;
 import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
+
+    private Disposable disposable;
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -56,13 +60,24 @@ public class MainActivity extends AppCompatActivity {
         TextView accountIdText = headerView.findViewById(R.id.text_account_id);
         accountIdText.setText(mainViewModel.getAccountIdBase32());
 
-        String accountCode = mainViewModel.getAccountCode();
-        if (Objects.isNull(accountCode) || accountCode.isEmpty()) {
-            headerView.findViewById(R.id.text_account_code).setVisibility(View.GONE);
-        } else {
-            TextView accountCodeText = headerView.findViewById(R.id.text_account_code);
-            accountCodeText.setText(AccountCodeUtils.format(accountCode));
-        }
+        disposable = mainViewModel.getAccount()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        account -> {
+                            String accountCode = account.getAccountCode();
+                            TextView accountCodeText = headerView.findViewById(R.id.text_account_code);
+                            if (Objects.isNull(accountCode) || accountCode.isEmpty()) {
+                                accountCodeText.setVisibility(View.GONE);
+                            } else {
+                                accountCodeText.setVisibility(View.VISIBLE);
+                                accountCodeText.setText(AccountCodeUtils.format(accountCode));
+                            }
+                        },
+                        error -> {
+                            // Handle error case
+                            headerView.findViewById(R.id.text_account_code).setVisibility(View.GONE);
+                        }
+                );
 
         headerView.findViewById(R.id.layout_account).setOnClickListener(v -> {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
@@ -81,5 +96,13 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 }
