@@ -36,9 +36,9 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_payment_requests">Payment Requests</string>
-    <string name="menu_nfts">NFTs</string>
-    <string name="menu_add_nft">Add NFT</string>
-    <string name="menu_nft_create_signature">Create signature</string>
+    <string name="menu_nfts">Image Hashes</string>
+    <string name="menu_add_nft">Add Image Hash</string>
+    <string name="menu_nft_create_signature">Create Image Hash</string>
     <string name="menu_contacts">Contacts</string>
     <string name="menu_contact">Contact</string>
     <string name="menu_add_contact">Add Contact</string>
@@ -78,7 +78,7 @@
     <string name="button_ok">OK</string>
 
     <string name="content_description_transaction_type">Transaction type</string>
-    <string name="content_description_nft_preview">NFT preview</string>
+    <string name="content_description_nft_preview">Image hash preview</string>
     <string name="content_description_flink_logo">Flink logo</string>
     <string name="content_description_pin_number_1">Pin number 1</string>
     <string name="content_description_pin_number_2">Pin number 2</string>
