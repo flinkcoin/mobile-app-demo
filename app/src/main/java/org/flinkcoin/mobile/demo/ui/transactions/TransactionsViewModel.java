@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import org.flinkcoin.data.proto.common.Common;
-
 import org.flinkcoin.mobile.demo.data.model.TransactionData;
 import org.flinkcoin.mobile.demo.data.model.TransactionType;
 import org.flinkcoin.mobile.demo.data.repository.AccountRepository;
@@ -114,6 +113,8 @@ public class TransactionsViewModel extends ViewModel {
                     transactions.postValue(items);
 
                 }, throwable -> {
+                    throwable.printStackTrace();
+                    transactions.postValue(new ArrayList<>());
 
                 });
         compositeDisposable.add(disposable);
