@@ -237,9 +237,10 @@ public class WalletRepository {
             throw new RuntimeException(e);
         }
         String nftCode = PDQHasherUtil.getHash(bitmap);
-        String nftCodeBase32 = Base32Helper.encode(ByteArrayHelper.hexStringToByteArray(nftCode));
+        byte[] nftBytes = ByteArrayHelper.hexStringToByteArray(nftCode);
+        String nftCodeBase32 = Base32Helper.encode(nftBytes);
 
-        savePreviewBitmap(bitmap, nftCodeBase32, context.getResources().getDisplayMetrics().widthPixels/5);
+        savePreviewBitmap(bitmap, nftCodeBase32, context.getResources().getDisplayMetrics().widthPixels / 5);
 
         lastWalletBlockRepository
                 .getLastWalletBlock(accountRepository.getAccountData().getAccountIdBase32())
@@ -249,9 +250,10 @@ public class WalletRepository {
                     KeyPair keyPair = accountRepository.getAccountData().getKeyPair();
 
                     byte[] account = null != accountCode ? accountCode.getBytes(StandardCharsets.UTF_8) : new byte[0];
-                    byte[] nft = null != nftCode ? nftCode.getBytes(StandardCharsets.UTF_8) : new byte[0];
+                    byte[] nft = nftBytes;
 
-                    LOGGER.info("creating add nft block: " + nftCode);
+                    LOGGER.info("creating add nft hex: " + nftCode);
+                    LOGGER.info("creating add nft code base32: " + nftCodeBase32);
                     Common.Block sendBlock = BlockHelper.createAddNftBlock(timestamp,
                             Base32Helper.decode(lastBlock.hash),
                             accountId,
