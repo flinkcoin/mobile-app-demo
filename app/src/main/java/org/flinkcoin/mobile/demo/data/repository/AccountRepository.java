@@ -46,6 +46,16 @@ public class AccountRepository {
                 });
     }
 
+    public Completable updateAccountCode(String accountCode) {
+        return accountDao.getAccount()
+                .switchIfEmpty(Maybe.error(new IllegalStateException("No account exists to update")))
+                .flatMapCompletable(existingAccount -> {
+                    existingAccount.setAccountCode(accountCode);
+                    this.accountData = new AccountData(existingAccount.getAccountId(), existingAccount.getAccountCode(), existingAccount.getSeed());
+                    return accountDao.update(existingAccount);
+                });
+    }
+
     public AccountData getAccountData() {
         return accountData;
     }

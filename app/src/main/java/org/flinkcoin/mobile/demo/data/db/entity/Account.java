@@ -29,7 +29,7 @@ public class Account {
     private final String pin;
 
     @ColumnInfo(name = "account_code")
-    private final String accountCode;
+    private String accountCode;
 
     public Account(@NonNull String accountId, @NonNull String accountIdMnemonicPhrase, @NonNull String seedMnemonicPhrase, byte[] seed, @NonNull String pin, String accountCode) {
         this.accountId = accountId;
@@ -66,5 +66,9 @@ public class Account {
 
     public String getAccountCode() {
         return accountCode;
+    }
+
+    public void setAccountCode(String accountCode) {
+        this.accountCode = accountCode;
     }
 }
