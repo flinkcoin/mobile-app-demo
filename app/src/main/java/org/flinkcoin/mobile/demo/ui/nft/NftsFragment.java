@@ -70,7 +70,6 @@ public class NftsFragment extends Fragment {
             binding.recyclerViewNfts.scheduleLayoutAnimation();
             binding.swipeRefreshNfts.setRefreshing(false);
         });
-
         nftViewModel.requestData();
 
         View view = binding.getRoot();
