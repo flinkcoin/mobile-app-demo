@@ -132,7 +132,7 @@ public class WalletRepository {
             }
 
             Account account = new Account(Base32Helper.encode(generatedAccountData.getAccountId()), generatedAccountData.getAccountIdPhrase(),
-                    generatedAccountData.getKeySeedPhrase(), generatedAccountData.getKeySeed(), pin);
+                    generatedAccountData.getKeySeedPhrase(), generatedAccountData.getKeySeed(), pin,"");
             accountRepository.insert(account).subscribe();
 
             Call<ResponseBody> payToResponse = macgyverService.payTo(Base32Helper.encode(accountId), "100000000000000");

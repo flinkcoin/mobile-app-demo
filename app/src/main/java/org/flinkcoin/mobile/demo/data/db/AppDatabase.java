@@ -11,7 +11,7 @@ import org.flinkcoin.mobile.demo.data.db.entity.Contact;
 @Database(entities = {Account.class, Contact.class}, version = AppDatabase.VERSION)
 public abstract class AppDatabase extends RoomDatabase {
 
-    static final int VERSION = 1;
+    static final int VERSION = 2;
 
     public abstract AccountDao accountDao();
 
