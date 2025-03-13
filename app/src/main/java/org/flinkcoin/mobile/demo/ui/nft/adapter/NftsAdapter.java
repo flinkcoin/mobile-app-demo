@@ -43,7 +43,12 @@ public class NftsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         nftViewHolder.getTransactionType().setImageResource(R.drawable.ic_receive_transaction);
         nftViewHolder.getNftCode().setText(nftData.getMaskedNftCode());
-        nftViewHolder.getAccountCode().setText(nftData.getAccountCode());
+
+        if(Objects.isNull(nftData.getAccountCode())|| nftData.getAccountCode().isEmpty()){
+            nftViewHolder.getAccountCode().setVisibility(View.GONE);
+        } else {
+            nftViewHolder.getAccountCode().setText(nftData.getAccountCode());
+        }
 
         Bitmap nftPreview = nftData.getNftPreview();
         if (Objects.nonNull(nftPreview)) {
