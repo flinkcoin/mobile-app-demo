@@ -12,13 +12,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import org.flinkcoin.data.proto.common.Common;
-import org.flinkcoin.helper.helpers.Base32Helper;
 import org.flinkcoin.mobile.demo.data.model.NftData;
 import org.flinkcoin.mobile.demo.data.repository.WalletRepository;
 import org.flinkcoin.mobile.demo.data.service.dto.WalletBlock;
 import org.flinkcoin.mobile.demo.ui.nft.adapter.NftDataItem;
 import org.flinkcoin.mobile.demo.util.AccountCodeUtils;
-import org.flinkcoin.mobile.demo.util.ByteArrayHelper;
 import org.flinkcoin.mobile.demo.util.NftCodeUtils;
 
 import java.io.File;
@@ -74,12 +72,11 @@ public class NftViewModel extends ViewModel {
 
                     for (WalletBlock walletBlock : nftBlocks) {
 
-                         if (DEL_NFT == walletBlock.blockType) {
+                        if (DEL_NFT == walletBlock.blockType) {
                             deleted.add(walletBlock.nftCode);
                         } else if (ADD_NFT == walletBlock.blockType) {
 
-                             byte[] bytes = ByteArrayHelper.hexStringToByteArray(walletBlock.nftCode);
-                             String nftCodeBase32 = Base32Helper.encode(bytes);
+                            String nftCodeBase32 = walletBlock.nftCode;
 
                             items.put(walletBlock.nftCode, new NftDataItem(new NftData(
                                     AccountCodeUtils.format(walletBlock.accountCode),
