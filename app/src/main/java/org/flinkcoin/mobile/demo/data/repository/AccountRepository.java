@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Single;
 
@@ -36,6 +37,10 @@ public class AccountRepository {
         this.accountDao = accountDao;
         this.mnemonicGenerator = new MnemonicGenerator();
         this.accountData = null;
+    }
+
+    public Flowable<Account> flowAccount() {
+        return accountDao.getAccountFlow();
     }
 
     public Maybe<Account> readAccount() {
