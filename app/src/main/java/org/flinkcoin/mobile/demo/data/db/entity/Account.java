@@ -28,12 +28,16 @@ public class Account {
     @ColumnInfo(name = "pin")
     private final String pin;
 
-    public Account(@NonNull String accountId, @NonNull String accountIdMnemonicPhrase, @NonNull String seedMnemonicPhrase, byte[] seed, @NonNull String pin) {
+    @ColumnInfo(name = "account_code")
+    private final String accountCode;
+
+    public Account(@NonNull String accountId, @NonNull String accountIdMnemonicPhrase, @NonNull String seedMnemonicPhrase, byte[] seed, @NonNull String pin, String accountCode) {
         this.accountId = accountId;
         this.accountIdMnemonicPhrase = accountIdMnemonicPhrase;
         this.seedMnemonicPhrase = seedMnemonicPhrase;
         this.seed = seed;
         this.pin = pin;
+        this.accountCode = accountCode;
     }
 
     @NonNull
@@ -58,5 +62,9 @@ public class Account {
     @NonNull
     public String getPin() {
         return pin;
+    }
+
+    public String getAccountCode() {
+        return accountCode;
     }
 }
