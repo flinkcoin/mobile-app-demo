@@ -3,6 +3,7 @@ package org.flinkcoin.mobile.demo.data.db.dao;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import org.flinkcoin.mobile.demo.data.db.entity.Account;
 
@@ -17,4 +18,7 @@ public abstract class AccountDao {
 
     @Insert
     public abstract Completable insert(Account account);
+
+    @Update
+    public abstract Completable update(Account account);
 }

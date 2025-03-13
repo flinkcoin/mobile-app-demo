@@ -21,6 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 
 import org.flinkcoin.mobile.demo.ui.main.MainViewModel;
+import org.flinkcoin.mobile.demo.util.AccountCodeUtils;
 
 import java.util.Objects;
 
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             headerView.findViewById(R.id.text_account_code).setVisibility(View.GONE);
         } else {
             TextView accountCodeText = headerView.findViewById(R.id.text_account_code);
-            accountCodeText.setText(accountCode);
+            accountCodeText.setText(AccountCodeUtils.format(accountCode));
         }
 
         headerView.findViewById(R.id.layout_account).setOnClickListener(v -> {

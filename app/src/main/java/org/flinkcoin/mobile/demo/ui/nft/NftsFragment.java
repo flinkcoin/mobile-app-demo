@@ -5,6 +5,9 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -19,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import org.flinkcoin.mobile.demo.R;
 import org.flinkcoin.mobile.demo.databinding.FragmentNftsBinding;
 import org.flinkcoin.mobile.demo.ui.nft.adapter.NftsAdapter;
 
@@ -41,6 +45,7 @@ public class NftsFragment extends Fragment {
                     }
                 });
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -49,7 +54,13 @@ public class NftsFragment extends Fragment {
         binding = FragmentNftsBinding.inflate(inflater, container, false);
         nftViewModel = new ViewModelProvider(requireActivity()).get(NftViewModel.class);
         binding.fabCreateNft.setOnClickListener((v) -> {
-            launchPhotoPicker();
+            String accountCode = nftViewModel.getAccountCode();
+
+            if (Objects.isNull(accountCode) || accountCode.isEmpty()) {
+                Navigation.findNavController(requireView()).navigate(NftsFragmentDirections.actionNavNftsToNavSetAccountCode());
+            } else {
+                launchPhotoPicker();
+            }
         });
 
         NftsAdapter nftsAdapter = new NftsAdapter(nftData -> {
@@ -80,6 +91,22 @@ public class NftsFragment extends Fragment {
         pickMedia.launch(new PickVisualMediaRequest.Builder()
                 .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                 .build());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Navigation.findNavController(requireView()).navigate(NftsFragmentDirections.actionNavNftsToNavSetAccountCode());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.nfts_menu, menu);
     }
 
     @Override
