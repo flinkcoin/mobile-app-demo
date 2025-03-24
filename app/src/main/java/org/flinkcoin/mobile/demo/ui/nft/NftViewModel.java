@@ -131,8 +131,8 @@ public class NftViewModel extends ViewModel {
         this.selectedImage = selectedImage;
     }
 
-    public void createNft() {
-        walletRepository.addNft(selectedImage);
+    public void createNft(boolean spottedAsReal) {
+        walletRepository.addNft(selectedImage, spottedAsReal);
     }
 
     public void requestData() {

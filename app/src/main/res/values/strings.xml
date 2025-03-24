@@ -3,6 +3,8 @@
     <string name="create_wallet">Create wallet</string>
     <string name="import_wallet">Import wallet</string>
     <string name="confirm">Confirm</string>
+    <string name="real">Real</string>
+    <string name="fake">Fake</string>
     <string name="cont">Continue</string>
     <string name="enter_pin">Enter your PIN</string>
     <string name="enter_login_pin">Enter your login PIN</string>

@@ -25,8 +25,14 @@ public class NftCreateHashFragment extends Fragment {
 
         binding.selectedImage.setImageURI(nftViewModel.getSelectedImage());
 
-        binding.buttonConfirm.setOnClickListener(v -> {
-            nftViewModel.createNft();
+        binding.buttonConfirmReal.setOnClickListener(v -> {
+            nftViewModel.createNft(true);
+            Navigation.findNavController(getView()).navigate(NftCreateHashFragmentDirections.actionNavNftCreateHashToNavNfts());
+
+        });
+
+        binding.buttonConfirmFake.setOnClickListener(v -> {
+            nftViewModel.createNft(false);
             Navigation.findNavController(getView()).navigate(NftCreateHashFragmentDirections.actionNavNftCreateHashToNavNfts());
 
         });

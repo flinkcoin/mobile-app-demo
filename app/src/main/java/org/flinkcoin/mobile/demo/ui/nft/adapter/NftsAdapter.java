@@ -1,11 +1,13 @@
 package org.flinkcoin.mobile.demo.ui.nft.adapter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.flinkcoin.mobile.demo.R;
@@ -17,11 +19,13 @@ import java.util.function.Consumer;
 
 public class NftsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private final Context context;
     private final Consumer<NftData> onClickConsumer;
 
     private List<NftDataItem> itemsDataSet;
 
-    public NftsAdapter(Consumer<NftData> onClickConsumer) {
+    public NftsAdapter(Context context, Consumer<NftData> onClickConsumer) {
+        this.context = context;
         this.onClickConsumer = onClickConsumer;
     }
 
@@ -44,11 +48,14 @@ public class NftsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         nftViewHolder.getTransactionType().setImageResource(R.drawable.ic_receive_transaction);
         nftViewHolder.getNftCode().setText(nftData.getMaskedNftCode());
 
-        if(Objects.isNull(nftData.getAccountCode())|| nftData.getAccountCode().isEmpty()){
+        if (Objects.isNull(nftData.getAccountCode()) || nftData.getAccountCode().isEmpty()) {
             nftViewHolder.getAccountCode().setVisibility(View.GONE);
         } else {
             nftViewHolder.getAccountCode().setText(nftData.getAccountCode());
         }
+
+        nftViewHolder.getSpottedAs().setText("REAL");
+        nftViewHolder.getSpottedAs().setTextColor(ContextCompat.getColor(context, R.color.green));
 
         Bitmap nftPreview = nftData.getNftPreview();
         if (Objects.nonNull(nftPreview)) {

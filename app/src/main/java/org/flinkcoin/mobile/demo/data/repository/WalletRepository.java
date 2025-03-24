@@ -228,7 +228,7 @@ public class WalletRepository {
 
     }
 
-    public void addNft(Uri nftUri) {
+    public void addNft(Uri nftUri, boolean spottedAsReal) {
 
         Bitmap bitmap = null;
         try {

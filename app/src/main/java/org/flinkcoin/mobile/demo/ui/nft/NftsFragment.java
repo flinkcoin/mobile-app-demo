@@ -63,7 +63,7 @@ public class NftsFragment extends Fragment {
             }
         });
 
-        NftsAdapter nftsAdapter = new NftsAdapter(nftData -> {
+        NftsAdapter nftsAdapter = new NftsAdapter(getContext(), nftData -> {
             ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("Nft code", nftData.getNftCodeBase32());
             clipboard.setPrimaryClip(clip);

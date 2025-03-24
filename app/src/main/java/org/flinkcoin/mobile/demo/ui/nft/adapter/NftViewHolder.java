@@ -13,6 +13,7 @@ public class NftViewHolder extends RecyclerView.ViewHolder {
     private final ImageView transactionType;
     private final TextView nftCode;
     private final TextView accountCode;
+    private final TextView spottedAs;
     private final ImageView nftPreview;
 
     public NftViewHolder(View view) {
@@ -20,6 +21,7 @@ public class NftViewHolder extends RecyclerView.ViewHolder {
         this.transactionType = view.findViewById(R.id.image_transaction_type);
         this.nftCode = view.findViewById(R.id.text_nft_code);
         this.accountCode = view.findViewById(R.id.text_account_code);
+        this.spottedAs = view.findViewById(R.id.text_spotted_as);
         this.nftPreview = view.findViewById(R.id.image_nft_preview);
     }
 
@@ -33,6 +35,10 @@ public class NftViewHolder extends RecyclerView.ViewHolder {
 
     public TextView getAccountCode() {
         return accountCode;
+    }
+
+    public TextView getSpottedAs(){
+        return spottedAs;
     }
 
     public ImageView getNftPreview() {

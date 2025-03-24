@@ -25,15 +25,27 @@
         app:layout_constraintGuide_percent="@integer/bottom_button_guideline" />
 
     <Button
-        android:id="@+id/button_confirm"
-        style="@style/Flink.Button"
+        android:id="@+id/button_confirm_real"
+        style="@style/Flink.ButtonReal"
         android:layout_width="@dimen/constraint_layout_auto_size"
         android:layout_height="@dimen/constraint_layout_auto_size"
         android:layout_margin="@dimen/button_margin"
-        android:text="@string/confirm"
+        android:text="@string/real"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_confirm_fake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_bottom_button" />
+
+    <Button
+        android:id="@+id/button_confirm_fake"
+        style="@style/Flink.ButtonFake"
+        android:layout_width="@dimen/constraint_layout_auto_size"
+        android:layout_height="@dimen/constraint_layout_auto_size"
+        android:layout_margin="@dimen/button_margin"
+        android:text="@string/fake"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_confirm_real"
         app:layout_constraintTop_toBottomOf="@id/guideline_bottom_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

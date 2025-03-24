@@ -41,6 +41,16 @@
         app:layout_constraintTop_toBottomOf="@id/text_nft_code"
         tools:text="#mynft" />
 
+    <TextView
+        android:id="@+id/text_spotted_as"
+        style="@style/Flink.TextView.TransactionRow.Timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/text_nft_code"
+        app:layout_constraintTop_toBottomOf="@id/text_nft_code"
+        tools:text="REAL" />
+
     <ImageView
         android:id="@+id/image_nft_preview"
         android:layout_width="wrap_content"
