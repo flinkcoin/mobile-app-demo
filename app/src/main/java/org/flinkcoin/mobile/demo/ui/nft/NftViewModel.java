@@ -22,8 +22,9 @@ import org.flinkcoin.mobile.demo.util.NftCodeUtils;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -71,8 +72,10 @@ public class NftViewModel extends ViewModel {
                             filter(walletBlock -> Common.Block.BlockType.ADD_NFT.equals(walletBlock.blockType) || DEL_NFT.equals(walletBlock.blockType)).
                             collect(Collectors.toList());
 
-                    Map<String, NftDataItem> items = new HashMap<>();
+                    Map<String, NftDataItem> items = new LinkedHashMap<>();
                     Set<String> deleted = new HashSet<>();
+
+                    nftBlocks.sort(Comparator.comparing(walletBlock -> walletBlock.timestamp));
 
                     for (WalletBlock walletBlock : nftBlocks) {
 
@@ -82,18 +85,26 @@ public class NftViewModel extends ViewModel {
 
                             String nftCodeBase32 = walletBlock.nftCode;
 
-                            items.put(walletBlock.nftCode, new NftDataItem(new NftData(
-                                    AccountCodeUtils.format(walletBlock.accountCode),
-                                    walletBlock.nftCode,
-                                    nftCodeBase32,
-                                    NftCodeUtils.mask(nftCodeBase32),
-                                    getPreview(nftCodeBase32),
-                                    walletBlock)));
+                            if (!items.containsKey(walletBlock.nftCode)) {
+                                items.put(walletBlock.nftCode, new NftDataItem(new NftData(
+                                        AccountCodeUtils.format(walletBlock.accountCode),
+                                        walletBlock.nftCode,
+                                        nftCodeBase32,
+                                        NftCodeUtils.mask(nftCodeBase32),
+                                        getPreview(nftCodeBase32),
+                                        walletBlock)));
+                            }
 
                         }
                     }
+
+                    List<NftDataItem> sortedNfts = new ArrayList<>();
+                    for (NftDataItem value : items.values()) {
+                        sortedNfts.add(0, value);
+                    }
+
                     deleted.forEach(items::remove);
-                    nfts.postValue(new ArrayList<>(items.values()));
+                    nfts.postValue(sortedNfts);
 
                 }, throwable -> {
                     throwable.printStackTrace();
