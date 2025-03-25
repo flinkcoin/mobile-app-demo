@@ -228,7 +228,7 @@ public class WalletRepository {
 
     }
 
-    public void addNft(Uri nftUri, boolean spottedAsReal) {
+    public void addNft(Uri nftUri, boolean spotterVoteReal) {
 
         Bitmap bitmap = null;
         try {
@@ -261,6 +261,7 @@ public class WalletRepository {
                             lastBlock.balance,
                             account,
                             nft,
+                            spotterVoteReal,
                             keyPair
                     );
 

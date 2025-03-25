@@ -54,8 +54,13 @@ public class NftsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             nftViewHolder.getAccountCode().setText(nftData.getAccountCode());
         }
 
-        nftViewHolder.getSpottedAs().setText("REAL");
-        nftViewHolder.getSpottedAs().setTextColor(ContextCompat.getColor(context, R.color.green));
+        if (nftData.isSpotterVoteReal()) {
+            nftViewHolder.getSpottedAs().setText(R.string.real);
+            nftViewHolder.getSpottedAs().setTextColor(ContextCompat.getColor(context, R.color.green));
+        } else {
+            nftViewHolder.getSpottedAs().setText(R.string.fake);
+            nftViewHolder.getSpottedAs().setTextColor(ContextCompat.getColor(context, R.color.red));
+        }
 
         Bitmap nftPreview = nftData.getNftPreview();
         if (Objects.nonNull(nftPreview)) {

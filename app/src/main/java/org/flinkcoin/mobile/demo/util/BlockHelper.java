@@ -27,19 +27,22 @@ public class BlockHelper {
     public static String createCreateBlock(long timestamp, byte[] accountId, KeyPair keyPair) throws
             NoSuchAlgorithmException, CryptoException, InvalidKeyException,
             SignatureException {
-        return Base32Helper.encode(createBlock(timestamp, Common.Block.BlockType.CREATE, EMPTY_BYTES, accountId, 0, 0, EMPTY_BYTES, EMPTY_BYTES, EMPTY_BYTES, EMPTY_BYTES, EMPTY_BYTES, keyPair).toByteArray());
+        return Base32Helper.encode(createBlock(timestamp, Common.Block.BlockType.CREATE, EMPTY_BYTES, accountId,
+                0, 0, EMPTY_BYTES, EMPTY_BYTES, EMPTY_BYTES, EMPTY_BYTES, EMPTY_BYTES, false, keyPair).toByteArray());
     }
 
     public static Common.Block createReceiveBlock(long timestamp, byte[] previousBlockHash, byte[] accountId, long balance, long amount, byte[] sendAccountId,
                                                   byte[] receiveBlockHash, byte[] referenceCode, KeyPair keyPair) throws NoSuchAlgorithmException, CryptoException, InvalidKeyException,
             SignatureException {
-        return createBlock(timestamp, Common.Block.BlockType.RECEIVE, previousBlockHash, accountId, balance, amount, sendAccountId, receiveBlockHash, referenceCode, EMPTY_BYTES, EMPTY_BYTES, keyPair);
+        return createBlock(timestamp, Common.Block.BlockType.RECEIVE, previousBlockHash, accountId,
+                balance, amount, sendAccountId, receiveBlockHash, referenceCode, EMPTY_BYTES, EMPTY_BYTES, false, keyPair);
     }
 
     public static Common.Block createSendBlock(long timestamp, byte[] previousBlockHash, byte[] accountId, long balance, long amount, byte[] sendAccountId,
                                                byte[] referenceCode, KeyPair keyPair) throws NoSuchAlgorithmException, CryptoException, InvalidKeyException,
             SignatureException {
-        return createBlock(timestamp, Common.Block.BlockType.SEND, previousBlockHash, accountId, balance, amount, sendAccountId, EMPTY_BYTES, referenceCode, EMPTY_BYTES, EMPTY_BYTES, keyPair);
+        return createBlock(timestamp, Common.Block.BlockType.SEND, previousBlockHash, accountId,
+                balance, amount, sendAccountId, EMPTY_BYTES, referenceCode, EMPTY_BYTES, EMPTY_BYTES, false, keyPair);
     }
 
     public static Common.PaymentRequest createPaymentRequest(byte[] fromAccount, byte[] toAccount, long amount, byte[] referenceCode) {
@@ -51,12 +54,15 @@ public class BlockHelper {
                 .build();
     }
 
-    public static Common.Block createAddNftBlock(long timestamp, byte[] previousBlockHash, byte[] accountId, long balance, byte[] accountCode, byte[] nftCode, KeyPair keyPair) throws NoSuchAlgorithmException, SignatureException, CryptoException, InvalidKeyException {
-        return createBlock(timestamp, Common.Block.BlockType.ADD_NFT, previousBlockHash, accountId, balance, 0, EMPTY_BYTES, EMPTY_BYTES, EMPTY_BYTES, accountCode, nftCode, keyPair);
+    public static Common.Block createAddNftBlock(long timestamp, byte[] previousBlockHash, byte[] accountId, long balance, byte[] accountCode, byte[] nftCode,
+                                                 boolean spotterVoteReal, KeyPair keyPair) throws NoSuchAlgorithmException, SignatureException, CryptoException, InvalidKeyException {
+        return createBlock(timestamp, Common.Block.BlockType.ADD_NFT, previousBlockHash, accountId,
+                balance, 0, EMPTY_BYTES, EMPTY_BYTES, EMPTY_BYTES, accountCode, nftCode, spotterVoteReal, keyPair);
     }
 
     private static Common.Block createBlock(long timestamp, Common.Block.BlockType blockType, byte[] previousBlockHash, byte[] accountId, long balance, long amount,
-                                            byte[] sendAccountId, byte[] receiveBlockHash, byte[] referenceCode, byte[] accountCode, byte[] nftCode, KeyPair keyPair) throws CryptoException,
+                                            byte[] sendAccountId, byte[] receiveBlockHash, byte[] referenceCode, byte[] accountCode, byte[] nftCode,
+                                            boolean spotterVoteReal, KeyPair keyPair) throws CryptoException,
             NoSuchAlgorithmException, SignatureException, InvalidKeyException {
 
         Common.Block.Body.Builder bodyBuilder = Common.Block.Body.newBuilder();
@@ -85,6 +91,8 @@ public class BlockHelper {
         if (nftCode.length > 0) {
             bodyBuilder.setNftCode(ByteString.copyFrom(nftCode));
         }
+        bodyBuilder.setSpotterVoteReal(spotterVoteReal);
+
         bodyBuilder.setPublicKeys(Common.Block.PublicKeys.newBuilder()
                 .addPublicKey(ByteString.copyFrom(keyPair.getPublicKey().getPublicKey())));
 

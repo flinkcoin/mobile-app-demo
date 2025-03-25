@@ -91,6 +91,7 @@ public class NftViewModel extends ViewModel {
                                         walletBlock.nftCode,
                                         nftCodeBase32,
                                         NftCodeUtils.mask(nftCodeBase32),
+                                        walletBlock.spotterVoteReal,
                                         getPreview(nftCodeBase32),
                                         walletBlock)));
                             }
@@ -131,8 +132,8 @@ public class NftViewModel extends ViewModel {
         this.selectedImage = selectedImage;
     }
 
-    public void createNft(boolean spottedAsReal) {
-        walletRepository.addNft(selectedImage, spottedAsReal);
+    public void createNft(boolean spotterVoteReal) {
+        walletRepository.addNft(selectedImage, spotterVoteReal);
     }
 
     public void requestData() {

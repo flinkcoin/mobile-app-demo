@@ -10,14 +10,17 @@ public class NftData {
     private final String nftCode;
     private final String nftCodeBase32;
     private final String maskedNftCode;
+    private final boolean spotterVoteReal;
     private final Bitmap nftPreview;
     private final WalletBlock walletBlock;
 
-    public NftData(String accountCode, String nftCode, String nftCodeBase32, String maskedNftCode, Bitmap nftPreview, WalletBlock walletBlock) {
+    public NftData(String accountCode, String nftCode, String nftCodeBase32, String maskedNftCode,
+                   boolean spotterVoteReal, Bitmap nftPreview, WalletBlock walletBlock) {
         this.accountCode = accountCode;
         this.nftCode = nftCode;
         this.nftCodeBase32 = nftCodeBase32;
         this.maskedNftCode = maskedNftCode;
+        this.spotterVoteReal = spotterVoteReal;
         this.nftPreview = nftPreview;
         this.walletBlock = walletBlock;
     }
@@ -36,6 +39,10 @@ public class NftData {
 
     public String getMaskedNftCode() {
         return maskedNftCode;
+    }
+
+    public boolean isSpotterVoteReal() {
+        return spotterVoteReal;
     }
 
     public Bitmap getNftPreview() {
